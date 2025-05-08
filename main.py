@@ -1,9 +1,8 @@
 
 import time
-import requests
-from bs4 import BeautifulSoup
+import random
 
-# Pesos dos sinais
+# Pesos simulados
 pesos = {
     "volume": 2.5,
     "rompimento_tecnico": 3.0,
@@ -20,26 +19,24 @@ pesos = {
     "squeeze": 2.0
 }
 
-# Simulação de sinais detectados
 def detectar_sinais():
-    return ["volume", "rompimento_tecnico", "baleias"]
+    # Simula entre 2 a 5 sinais aleatórios por ciclo
+    return random.sample(list(pesos.keys()), random.randint(2, 5))
 
-# Cálculo da nota OLIMPO
 def calcular_nota(sinais, pesos):
     return round(sum(pesos.get(s, 0) for s in sinais), 2)
 
-# Loop principal
+print("Sistema OLIMPO iniciado com sucesso...")
 while True:
-    print("Iniciando varredura...")
     sinais = detectar_sinais()
     nota = calcular_nota(sinais, pesos)
-    print(f"Sinais detectados: {sinais}")
-    print(f"Nota OLIMPO: {nota}")
+    print(f"[OLIMPO] Sinais detectados: {sinais}")
+    print(f"[OLIMPO] Nota calculada: {nota}")
     if nota >= 8.0:
-        print(">>> ALERTA: Entrada recomendada.")
+        print(">>> ALERTA: Entrada recomendada!")
     elif nota >= 7.5:
         print(">>> Alerta moderado: Acompanhar.")
     else:
         print("Sem entrada válida.")
-    print("-" * 40)
-    time.sleep(60)  # Aguarda 1 minuto antes da próxima varredura
+    print("-" * 50)
+    time.sleep(60)
